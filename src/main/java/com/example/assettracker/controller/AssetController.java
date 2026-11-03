@@ -1,10 +1,10 @@
 package com.example.assettracker.controller;
 
+import com.example.assettracker.constants.AssetStatus;
 import com.example.assettracker.model.Asset;
 import com.example.assettracker.service.AssetService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,17 +20,16 @@ public class AssetController {
     }
 
     @GetMapping
-    public List<Asset> getAssets(@RequestParam(required = false) String status) {
-        if (status != null && !status.trim().isEmpty()) {
+    public List<Asset> getAssets(@RequestParam(required = false) AssetStatus status) {
+        if (status != null) {
             return assetService.findByStatus(status);
         }
         return assetService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Asset> getById(@PathVariable Long id) {
-        var asset = assetService.findById(id);
-        return ResponseEntity.ok(asset);
+    public Asset getById(@PathVariable Long id) {
+        return assetService.findById(id);
     }
 
     @PostMapping
@@ -43,6 +42,10 @@ public class AssetController {
     public Asset update(@PathVariable Long id, @Valid @RequestBody Asset asset) {
         return assetService.update(id, asset);
     }
+
+    // TO-DO
+    // Consider of bringing a Patch end point to handle partial updates
+    // Since update() replaces all fields
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

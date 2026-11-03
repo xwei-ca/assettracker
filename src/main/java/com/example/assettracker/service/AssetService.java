@@ -1,5 +1,7 @@
 package com.example.assettracker.service;
 
+import com.example.assettracker.constants.AssetStatus;
+import com.example.assettracker.exception.DuplicateRecordException;
 import com.example.assettracker.exception.RecordNotFoundException;
 import com.example.assettracker.model.Asset;
 import com.example.assettracker.repository.AssetRepository;
@@ -25,11 +27,15 @@ public class AssetService {
             .orElseThrow(() -> new RecordNotFoundException("Asset not found with ID: " + id));
     }
 
-    public List<Asset> findByStatus(String status) {
+    public List<Asset> findByStatus(AssetStatus status) {
         return assetRepository.findByStatus(status);
     }
 
     public Asset create(Asset asset) {
+        if (asset.getSerialNumber() != null 
+            && assetRepository.findBySerialNumber(asset.getSerialNumber()).isPresent()) {
+            throw new DuplicateRecordException("Serial number already exists: " + asset.getSerialNumber());
+        }
         return assetRepository.save(asset);
     }
 
@@ -43,10 +49,13 @@ public class AssetService {
                 existing.setAssignedTo(updated.getAssignedTo());
                 return assetRepository.save(existing);
             })
-            .orElseThrow(() -> new RecordNotFoundException("Asset not found: " + id));
+            .orElseThrow(() -> new RecordNotFoundException("Asset not found with ID: " + id));
     }
 
     public void delete(Long id) {
+        if (!assetRepository.existsById(id)) {
+            throw new RecordNotFoundException("Asset not found with ID: " + id);
+        }
         assetRepository.deleteById(id);
     }
 }

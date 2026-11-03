@@ -1,5 +1,7 @@
 package com.example.assettracker.model;
 
+import com.example.assettracker.constants.AssetStatus;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -15,12 +17,15 @@ public class Asset {
     @Column(nullable = false)
     private String name;
 
+    @NotBlank
     @Column(nullable = false)
     private String type;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String status;
+    private AssetStatus status;
 
+    @Column(unique = true)
     private String serialNumber;
 
     private String assignedTo;
@@ -28,7 +33,7 @@ public class Asset {
     // Constructors
     public Asset() {}
 
-    public Asset(String name, String type, String status, String serialNumber, String assignedTo) {
+    public Asset(String name, String type, AssetStatus status, String serialNumber, String assignedTo) {
         this.name = name;
         this.type = type;
         this.status = status;
@@ -46,8 +51,8 @@ public class Asset {
     public String getType() { return type; }
     public void setType(String type) { this.type = type; }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public AssetStatus getStatus() { return status; }
+    public void setStatus(AssetStatus status) { this.status = status; }
 
     public String getSerialNumber() { return serialNumber; }
     public void setSerialNumber(String serialNumber) { this.serialNumber = serialNumber; }
