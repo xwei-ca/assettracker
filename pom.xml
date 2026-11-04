@@ -73,6 +73,25 @@
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!-- Spring Web Services (SOAP) -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webservices</artifactId>
+		</dependency>
+
+		<!-- WSDL4J runtime dependency (required for WSDL generation) -->
+		<dependency>
+			<groupId>wsdl4j</groupId>
+			<artifactId>wsdl4j</artifactId>
+		</dependency>
+		
+		<!-- SOAP test -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webservices-test</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -80,6 +99,25 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<!--  JAXB Maven plugin -->
+			<plugin>
+			    <groupId>org.codehaus.mojo</groupId>
+			    <artifactId>jaxb2-maven-plugin</artifactId>
+			    <version>4.0.0</version>
+			    <executions>
+			        <execution>
+			            <id>xjc</id>
+			            <goals>
+			                <goal>xjc</goal>
+			            </goals>
+			        </execution>
+			    </executions>
+			    <configuration>
+			        <sources>
+			            <source>${project.basedir}/src/main/resources/META-INF/schemas/assetWs.xsd</source>
+			        </sources>
+			    </configuration>
 			</plugin>
 		</plugins>
 	</build>

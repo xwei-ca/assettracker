@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://example.com/assettracker/soap"
+           targetNamespace="http://example.com/assettracker/soap"
+           elementFormDefault="qualified">
+
+    <!-- Request: GetAssetRequest -->
+    <xs:element name="getAssetRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="id" type="xs:long"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Response: GetAssetResponse -->
+    <xs:element name="getAssetResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="asset" type="tns:asset" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- The Asset type -->
+    <xs:complexType name="asset">
+        <xs:sequence>
+            <xs:element name="id" type="xs:long"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="status" type="xs:string"/>
+            <xs:element name="serialNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="assignedTo" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+</xs:schema>
