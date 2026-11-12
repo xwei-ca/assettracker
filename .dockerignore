@@ -1,0 +1,11 @@
+# For Multi-stage container build (i.e. copy src, builds inside) "target/" folder can be excluded.
+# Since the jar build happens inside the container; target/ is generated there
+#target/
+.git/
+# If use JetBrains IDEs then consider of add .idea/ folder here (optional)
+#.idea/
+*.iml
+README.md
+HELP.md
+Dockerfile
+.dockerignore
