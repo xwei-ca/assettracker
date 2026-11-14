@@ -82,5 +82,5 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/spring-boot-app:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/assettracker:latest
+            ${{ secrets.DOCKERHUB_USERNAME }}/assettracker:${{ github.sha }}
