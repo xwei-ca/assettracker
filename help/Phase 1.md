@@ -13,7 +13,7 @@ Make sure you have:
 ---
 
 ## Step 1: Create the project
-The easiest way is **Spring Initializr** ([start.spring.io](start.spring.io)). Choose:
+The easiest way is **Spring Initializr** ([https://start.spring.io](start.spring.io)). Choose:
 
 - **Project:** Maven
 
