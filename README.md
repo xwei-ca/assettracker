@@ -8,7 +8,7 @@ A simple domain (tracking company assets: laptops, monitors, licenses) keeps the
 
 ## Architecture Overview
 
-'''
+```
 [Browser: GWT/GXT frontend]
         │  (AJAX / JSON over REST)
         ▼
@@ -20,7 +20,7 @@ A simple domain (tracking company assets: laptops, monitors, licenses) keeps the
         │
         ▼
    [Relational Database]
-'''
+```
 
 Plus:
 
@@ -38,11 +38,11 @@ Plus:
 
 - Create a Spring Boot project (Spring Initializr) with **Maven**, Spring Web, Spring Data JPA, and H2 (or PostgreSQL).
 
-- Define an 'Asset' entity (id, name, type, status, assignedTo).
+- Define an `Asset` entity (id, name, type, status, assignedTo).
 
 - Build a repository and a service layer.
 
-- Expose **REST endpoints:** 'GET /api/assets', 'GET /api/assets/{id}', 'POST /api/assets', 'PUT', 'DELETE'.
+- Expose **REST endpoints:** `GET /api/assets`, `GET /api/assets/{id}`, `POST /api/assets`, `PUT`, `DELETE`.
 
 - Return **JSON**; verify with Postman or curl.
 
