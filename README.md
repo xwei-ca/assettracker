@@ -1,4 +1,4 @@
-### Project: "Asset Tracker" — A Small Enterprise-Style Web Application
+# Project: "Asset Tracker" — A Small Enterprise-Style Web Application
 
 ## Why this project
 
@@ -6,8 +6,9 @@ It's simple enough to finish, but it naturally exercises every major piece of th
 
 A simple domain (tracking company assets: laptops, monitors, licenses) keeps the focus on learning the plumbing, not on business complexity.
 
-Architecture Overview
-text
+## Architecture Overview
+
+'''
 [Browser: GWT/GXT frontend]
         │  (AJAX / JSON over REST)
         ▼
@@ -19,34 +20,36 @@ text
         │
         ▼
    [Relational Database]
+'''
+
 Plus:
 
-Maven builds the whole thing
+- **Maven** builds the whole thing
 
-JUnit tests the service and controller layers
+- **JUnit** tests the service and controller layers
 
-Selenium drives the browser against the running app
+- **Selenium** drives the browser against the running app
 
-Docker packages it for deployment
+- **Docker** packages it for deployment
 
-Phase-by-Phase Build Plan
-Phase 1 — Backend foundation (Spring Boot + REST + JPA)
-Goal: a working REST API backed by a database.
+## Phase-by-Phase Build Plan
+### Phase 1 — Backend foundation (Spring Boot + REST + JPA)
+**Goal:** a working REST API backed by a database.
 
-Create a Spring Boot project (Spring Initializr) with Maven, Spring Web, Spring Data JPA, and H2 (or PostgreSQL).
+- Create a Spring Boot project (Spring Initializr) with **Maven**, Spring Web, Spring Data JPA, and H2 (or PostgreSQL).
 
-Define an Asset entity (id, name, type, status, assignedTo).
+- Define an 'Asset' entity (id, name, type, status, assignedTo).
 
-Build a repository and a service layer.
+- Build a repository and a service layer.
 
-Expose REST endpoints: GET /api/assets, GET /api/assets/{id}, POST /api/assets, PUT, DELETE.
+- Expose **REST endpoints:** 'GET /api/assets', 'GET /api/assets/{id}', 'POST /api/assets', 'PUT', 'DELETE'.
 
-Return JSON; verify with Postman or curl.
+- Return **JSON**; verify with Postman or curl.
 
-What you'll learn: how Spring Boot wires controllers → services → repositories, how JSON serialization works out of the box, and how Maven manages dependencies.
+**What you'll learn**: how Spring Boot wires controllers → services → repositories, how JSON serialization works out of the box, and how Maven manages dependencies.
 
-Phase 2 — SOAP web service with JAXB
-Goal: add a second API style, as real enterprises often run both.
+### Phase 2 — SOAP web service with JAXB
+**Goal**: add a second API style, as real enterprises often run both.
 
 Add Spring Web Services.
 
