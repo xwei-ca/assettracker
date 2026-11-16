@@ -2,10 +2,11 @@
 # Since the jar build happens inside the container; target/ is generated there
 #target/
 .git/
-# If use JetBrains IDEs then consider of add .idea/ folder here (optional)
+help/
+# If use JetBrains IDEs then consider of add .idea/ and *.iml here (optional)
 #.idea/
-*.iml
+# *.iml
 README.md
 HELP.md
-Dockerfile
+dockerfile
 .dockerignore
