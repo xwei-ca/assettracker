@@ -6,6 +6,8 @@ It's simple enough to finish, but it naturally exercises every major piece of th
 
 A simple domain (tracking company assets: laptops, monitors, licenses) keeps the focus on learning the plumbing, not on business complexity.
 
+---
+
 ## Architecture Overview
 
 ```
@@ -32,6 +34,8 @@ Plus:
 
 - **Docker** packages it for deployment
 
+---
+
 ## Phase-by-Phase Build Plan
 ### Phase 1 — Backend foundation (Spring Boot + REST + JPA)
 **Goal:** a working REST API backed by a database.
@@ -48,66 +52,78 @@ Plus:
 
 **What you'll learn**: how Spring Boot wires controllers → services → repositories, how JSON serialization works out of the box, and how Maven manages dependencies.
 
+---
+
 ### Phase 2 — SOAP web service with JAXB
-**Goal**: add a second API style, as real enterprises often run both.
+**Goal:** add a second API style, as real enterprises often run both.
 
-Add Spring Web Services.
+- Add **Spring Web Services**.
 
-Define an XSD schema for a simple operation (e.g., GetAssetRequest / GetAssetResponse).
+- Define an XSD schema for a simple operation (e.g., `GetAssetRequest` / `GetAssetResponse`).
 
-Generate JAXB classes from the XSD (the jaxb2-maven-plugin does this).
+- Generate JAXB classes from the XSD (the `jaxb2-maven-plugin` does this).
 
-Implement a SOAP endpoint that returns asset data as XML.
+- Implement a SOAP endpoint that returns asset data as XML.
 
-Test it with SoapUI or curl.
+- Test it with **SoapUI** or curl.
 
-What you'll learn: the difference between REST/JSON and SOAP/XML, how JAXB maps XML to Java objects, and why enterprises still use SOAP for legacy integrations.
+**What you'll learn:** the difference between REST/JSON and SOAP/XML, how JAXB maps XML to Java objects, and why enterprises still use SOAP for legacy integrations.
 
-Phase 3 — GWT/GXT-style frontend with AJAX
-Goal: a browser UI that calls the REST API asynchronously.
+---
 
-A note: GWT/GXT is aging and painful to set up from scratch today. For learning purposes, you have two options:
+### Phase 3 — GWT/GXT-style frontend with AJAX
+**Goal:** a browser UI that calls the REST API asynchronously.
 
-Option A (closer to the requirement): Build a small GWT app (GWT 2.10+ still works) with a simple table and form, using GWT-RPC or RequestBuilder for AJAX calls to your REST API.
+A note: **GWT/GXT is aging** and painful to set up from scratch today. For learning purposes, you have two options:
 
-Option B (more practical): Build the frontend in plain JavaScript + HTML + CSS using fetch() for AJAX calls and JSON parsing. This teaches the same concepts (async calls, JSON handling, DOM updates) without the GWT setup friction.
+**Option A (closer to the requirement)**: Build a small **GWT** app (GWT 2.10+ still works) with a simple table and form, using GWT-RPC or `RequestBuilder` for AJAX calls to your REST API.
 
-My recommendation: do Option B first to understand AJAX/JSON quickly, then spend a day on Option A just to see how GWT compiles Java to JavaScript. That gives you real familiarity with both without sinking weeks into GWT tooling.
+**Option B (more practical)**: Build the frontend in **plain JavaScript + HTML + CSS** using `fetch()` for AJAX calls and JSON parsing. This teaches the same concepts (async calls, JSON handling, DOM updates) without the GWT setup friction.
 
-What you'll learn: how a browser talks to a backend asynchronously, how JSON is parsed and rendered, and (with GWT) how Java can be compiled to JavaScript.
+**My recommendation**: do **Option B first** to understand AJAX/JSON quickly, then spend a day on **Option A** just to see how GWT compiles Java to JavaScript. That gives you real familiarity with both without sinking weeks into GWT tooling.
 
-Phase 4 — Testing: JUnit + Selenium
-Goal: automated tests at two levels.
+**What you'll learn:** how a browser talks to a backend asynchronously, how JSON is parsed and rendered, and (with GWT) how Java can be compiled to JavaScript.
 
-JUnit: unit-test the service layer (mock the repository with Mockito) and write integration tests for the REST controllers using @SpringBootTest and MockMvc.
+[Code can be found here:](https://github.com/xwei-ca/gwtassettracker) 
 
-Selenium: write a small test that opens the UI in a browser, adds an asset, and verifies it appears in the table. Run it against the locally running app.
+---
 
-What you'll learn: the difference between unit, integration, and UI tests — and why enterprises invest in all three.
+### Phase 4 — Testing: JUnit + Selenium
+**Goal:** automated tests at two levels.
 
-Phase 5 — Docker + Tomcat deployment
-Goal: package and run the app as a container.
+- **JUnit**: unit-test the service layer (mock the repository with Mockito) and write integration tests for the REST controllers using `@SpringBootTest` and `MockMvc`.
 
-Write a Dockerfile (Spring Boot can build a runnable JAR; run it on a Tomcat base image or use the embedded Tomcat).
+- **Selenium**: write a small test that opens the UI in a browser, adds an asset, and verifies it appears in the table. Run it against the locally running app.
 
-Build the image with Maven (mvn spring-boot:build-image or a manual Dockerfile).
+**What you'll learn:** the difference between unit, integration, and UI tests — and why enterprises invest in all three.
 
-Run it with docker run, expose the port, and confirm the app works in the container.
+---
 
-Optionally, add docker-compose.yml with the app + a PostgreSQL container.
+### Phase 5 — Docker + Tomcat deployment
+**Goal:** package and run the app as a container.
 
-What you'll learn: how containerization works in practice, how the app behaves outside your IDE, and the basics of orchestration-ready packaging.
+- Write a `dockerfile` (Spring Boot can build a runnable JAR; run it on a Tomcat base image or use the embedded Tomcat).
 
-On Hyper-V: you don't need it for this project, but if you're on Windows, you can note that Docker Desktop uses Hyper-V (or WSL2) as its virtualization layer — that's a legitimate, discussable connection to the requirement.
+- Build the image with Maven (`mvn spring-boot:build-image` or a manual dockerfile).
 
-Phase 6 (optional) — CI/CD with GitLab
-Goal: see how the pieces automate.
+- Run it with `docker run`, expose the port, and confirm the app works in the container.
 
-Push the project to GitLab.
+- Optionally, add `docker-compose.yml` with the app + a PostgreSQL container.
 
-Add a .gitlab-ci.yml that runs mvn test on every push.
+**What you'll learn:** how containerization works in practice, how the app behaves outside your IDE, and the basics of orchestration-ready packaging.
 
-Bonus: add a stage that builds the Docker image.
+**On Hyper-V:** you don't need it for this project, but if you're on Windows, you can note that Docker Desktop uses Hyper-V (or WSL2) as its virtualization layer — that's a legitimate, discussable connection to the requirement.
 
-What you'll learn: how continuous integration actually runs, and how Maven, JUnit, and Docker fit into a pipeline.
+---
+
+### Phase 6 (optional) — CI/CD with GitHub
+**Goal:** see how the pieces automate.
+
+- Push the project to **GitHub**.
+
+- Add a `ci-cd.yml` that runs `mvn test` on every push.
+
+- Bonus: add a stage that builds the Docker image.
+
+**What you'll learn:** how continuous integration actually runs, and how Maven, JUnit, and Docker fit into a pipeline.
 
